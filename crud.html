@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CRUD System</title>
+</head>
+<body>
+    
+    <div class="crud">
+        <div class="head">
+            <h2>Crud</h2>
+            <p>PRODUCT MANAGEMENT SYSTEM</p>
+        </div>
+        <div class="inputs">
+            <input type="text" placeholder="title" id="title">
+            <div class="price">
+                <input type="number" placeholder="price" id="price">
+                <input type="number" placeholder="taxes" id="taxes">
+                <input type="number" placeholder="ads" id="ads">
+                <input type="number" placeholder="discount" id="discount">
+                <small id="total">33333</small>
+            </div>
+            <input type="number" placeholder="count" id="count">
+            <input type="text" placeholder="category" id="category">
+            <button id="submit">Create</button>
+
+        </div>
+        <div class="outputs">
+            <div class="searchblock">
+                <input type="text" placeholder="Search" id="search">
+                <div class="btnsearch">
+                    <button id="searchtitle">Search By Title</button>
+                    <button id="searchcategory">Search By Category</button>
+
+                </div>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>price</th>
+                <th>taxes</th>
+                <th>ads</th>
+                <th>disscout</th>
+                <th>total</th>
+                <th>category</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            <tbody>
+                <td>1</td>
+                <td>iphone</td>
+                <td>1000</td>
+                <td>5000</td>
+                <td>1000</td>
+                <td>1000</td>
+                <td>sdsasf</td>
+                <td>sdsasf</td>
+                <td><button id="update">update</button></td>
+                <td><button id="delete">delete</button></td>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
