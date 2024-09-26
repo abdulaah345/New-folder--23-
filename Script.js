@@ -82,17 +82,47 @@ function showdata(){
                 <td>${datapro[i].price}</td>
                 <td>${datapro[i].taxes}</td>
                 <td>${datapro[i].ads}</td>
-                  <td>${datapro[i].total}</td>
+                <td>${datapro[i].total}</td>
                 <td>${datapro[i].discount}</td>
                 <td>${datapro[i].category}</td>
                 <td><button id="update">update</button></td>
-                <td><button id="delete">delete</button></td>
+                <td><button onClick=deleteitem(${i}) id="delete">delete</button></td>
                 </tr>
         
         `
     }
 
     document.getElementById('tbody').innerHTML=table;
+    let btndelete=document.getElementById('deleteall');
+    if(datapro.length>0)
+    {
+        btndelete.innerHTML=
+    
+        `
+                        <td><button onClick="deleteall()">Delete ALL</button></td>
+    
+        `
+    }
+    else{
+        btndelete.innerHTML='';
+    }
+  
 }
 
 showdata()
+
+
+
+//DELETE ITEM
+ function deleteitem(i){
+   datapro.splice(i,1);
+   localStorage.product=JSON.stringify(datapro)
+   showdata()
+ }
+
+
+ function deleteall(){
+    localStorage.clear();
+    datapro.splice(0);
+    showdata();
+ }
