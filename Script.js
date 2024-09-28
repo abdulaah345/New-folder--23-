@@ -8,6 +8,10 @@ let count=document.getElementById('count');
 let category=document.getElementById('category');
 let submit=document.getElementById('submit');
 
+
+let mood='create';
+let tmp;
+
 //gettotal
 
 function getTotal(){
@@ -30,8 +34,7 @@ if(localStorage.product!=null){
 }else{
     datapro=[];
 }
-
-
+// let datapro = JSON.parse(localStorage.getItem("product")) || []
 
 submit.onclick=function(){
    let newpro={
@@ -44,18 +47,39 @@ submit.onclick=function(){
     count:count.value,
     category:category.value,
    }
-   datapro.push(newpro);
+   if(mood==='create'){
+
+       if(newpro.count>1){
+        for(let i=0;i<newpro.count;i++)
+        {
+            datapro.push(newpro);
+        }
+       }
+       else{
+        datapro.push(newpro);
+     
+       }
+   }
+   else
+   {
+    datapro[tmp]=newpro
+    mood='create'
+    submit.innerHTML='Create';
+    count.style.display='block';
+   }
+
    localStorage.setItem('product',JSON.stringify(datapro))
    console.log(datapro);
-   clear()
+   
    showdata()
+   cleardata()
 }
 
 
 //clear input
 
 
-function clear(){
+function cleardata(){
     title.value='',
     price.value='',
     taxes.value='',
@@ -71,10 +95,11 @@ function clear(){
 //read data
 
 function showdata(){
+    getTotal()
     let table='';
     for(let i=0;i<datapro.length;i++)
     {
-        table+=
+        table +=
         `
         <tr>
                 <td>${i}</td>
@@ -85,21 +110,21 @@ function showdata(){
                 <td>${datapro[i].total}</td>
                 <td>${datapro[i].discount}</td>
                 <td>${datapro[i].category}</td>
-                <td><button id="update">update</button></td>
+                <td><button onClick=updatedata(${i}) id="update">update</button></td>
                 <td><button onClick=deleteitem(${i}) id="delete">delete</button></td>
                 </tr>
         
         `
     }
 
-    document.getElementById('tbody').innerHTML=table;
+    document.getElementById('ttbody').innerHTML=table;
     let btndelete=document.getElementById('deleteall');
     if(datapro.length>0)
     {
         btndelete.innerHTML=
     
         `
-                        <td><button onClick="deleteall()">Delete ALL</button></td>
+                        <td><button onClick="deleteall()">Delete ALL(${datapro.length})</button></td>
     
         `
     }
@@ -109,7 +134,7 @@ function showdata(){
   
 }
 
-showdata()
+showdata();
 
 
 
@@ -122,7 +147,28 @@ showdata()
 
 
  function deleteall(){
-    localStorage.clear();
-    datapro.splice(0);
+     datapro.splice(0);
+     localStorage.clear();
     showdata();
+ }
+
+
+ //update item
+
+ function updatedata(i){
+    title.value=datapro[i].title;
+    price.value=datapro[i].price;
+    taxes.value=datapro[i].taxes;
+    ads.value=datapro[i].ads;
+    discount.value=datapro[i].discount;
+    getTotal()
+    count.style.display='none'
+    category.value=datapro[i].category;
+    submit.innerHTML='Update';
+    mood='update';
+    tmp=i;
+    scroll({
+        top:0,
+        behavior:"smooth"
+    })
  }
