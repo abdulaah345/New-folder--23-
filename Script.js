@@ -47,32 +47,37 @@ submit.onclick=function(){
     count:count.value,
     category:category.value.toLowerCase(),
    }
-   if(mood==='create'){
 
-       if(newpro.count>1){
-        for(let i=0;i<newpro.count;i++)
-        {
-            datapro.push(newpro);
+   if(title.value!=''&&price.value!=''&&category.value!=''&&newpro.count<100){
+    if(mood==='create'){
+
+        if(newpro.count>1){
+         for(let i=0;i<newpro.count;i++)
+         {
+             datapro.push(newpro);
+         }
         }
-       }
-       else{
-        datapro.push(newpro);
-     
-       }
+        else{
+         datapro.push(newpro);
+      
+        }
+    }
+    else
+    {
+     datapro[tmp]=newpro
+     mood='create'
+     submit.innerHTML='Create';
+     count.style.display='block';
+    }
+    cleardata()
    }
-   else
-   {
-    datapro[tmp]=newpro
-    mood='create'
-    submit.innerHTML='Create';
-    count.style.display='block';
-   }
+  
 
    localStorage.setItem('product',JSON.stringify(datapro))
    console.log(datapro);
    
    showdata()
-   cleardata()
+ 
 }
 
 
@@ -102,13 +107,13 @@ function showdata(){
         table +=
         `
         <tr>
-                <td>${i}</td>
+                <td>${i+1}</td>
                 <td>${datapro[i].title}</td>
                 <td>${datapro[i].price}</td>
                 <td>${datapro[i].taxes}</td>
                 <td>${datapro[i].ads}</td>
-                <td>${datapro[i].total}</td>
                 <td>${datapro[i].discount}</td>
+                <td>${datapro[i].total}</td>
                 <td>${datapro[i].category}</td>
                 <td><button onClick=updatedata(${i}) id="update">update</button></td>
                 <td><button onClick=deleteitem(${i}) id="delete">delete</button></td>
@@ -208,8 +213,9 @@ showdata();
                         <td>${datapro[i].price}</td>
                         <td>${datapro[i].taxes}</td>
                         <td>${datapro[i].ads}</td>
-                        <td>${datapro[i].total}</td>
+                       
                         <td>${datapro[i].discount}</td>
+                         <td>${datapro[i].total}</td>
                         <td>${datapro[i].category}</td>
                         <td><button onClick=updatedata(${i}) id="update">update</button></td>
                         <td><button onClick=deleteitem(${i}) id="delete">delete</button></td>
@@ -233,8 +239,9 @@ showdata();
                             <td>${datapro[i].price}</td>
                             <td>${datapro[i].taxes}</td>
                             <td>${datapro[i].ads}</td>
-                            <td>${datapro[i].total}</td>
+                            
                             <td>${datapro[i].discount}</td>
+                            <td>${datapro[i].total}</td>
                             <td>${datapro[i].category}</td>
                             <td><button onClick=updatedata(${i}) id="update">update</button></td>
                             <td><button onClick=deleteitem(${i}) id="delete">delete</button></td>
